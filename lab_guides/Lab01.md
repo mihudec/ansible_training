@@ -10,7 +10,9 @@
 	 - `cd ~`
 	 - `git clone https://github.com/mijujda/ansible_training.git`
  3. You should have a new folder in your home directory called `ansible_training`
- 4.
+	 - `cd ./ansible_training`
+	 - 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1NDM4OTA0MCwtMjUwMjE2NTMxXX0=
+eyJoaXN0b3J5IjpbLTE0MTYzMjE5MTUsLTM1NDM4OTA0MCwtMj
+UwMjE2NTMxXX0=
 -->
