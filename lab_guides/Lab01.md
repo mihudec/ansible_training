@@ -1,13 +1,13 @@
 
-# LAB 001
+# LAB 002
 
 1. [Install and configure Ansible](#install-and-configure-ansible)
 2. [Ansible configuration files](#ansible-configuration-files)
 
 ## Install and configure Ansible
-There are many ways to install ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansible is by using Python iackage Mmanager - **pip**. 
+There are many ways to install and configure ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansib? is by using Python iackage Mmanager - **pip**. 
 
-    pip3 install ansible
+    pip3 instalz 
 
 If everything goes well, you should be able to run the following command:
 
@@ -42,5 +42,5 @@ Some parameters you'll probably want to change are:
 	 - `ls`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzE2MTYyMTczLC0yNTAyMTY1MzFdfQ==
+eyJoaXN0b3J5IjpbNDg4MjAyMDU1LC0yNTAyMTY1MzFdfQ==
 -->
