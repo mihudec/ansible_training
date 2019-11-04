@@ -56,8 +56,9 @@ all:
       ansible_host: 10.8.8.130
     
 ```
-The top-level key is **all** - this is a group that contains all hosts in inventory. 
+The top-level key is **all** - this is a group that contains all hosts in the inventory. 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc5MzcxNTE4LC02MDQ0MzkzMjksLTE0MT
-YzMjE5MTUsLTM1NDM4OTA0MCwtMjUwMjE2NTMxXX0=
+eyJoaXN0b3J5IjpbLTgzNzkwMTM2Myw2NzkzNzE1MTgsLTYwND
+QzOTMyOSwtMTQxNjMyMTkxNSwtMzU0Mzg5MDQwLC0yNTAyMTY1
+MzFdfQ==
 -->
