@@ -1,14 +1,13 @@
 
-# LAB 00
+# LAB 01
 
 1. [Install and configure Ansible](#install-and-configure-ansible)
 2. [Ansible configuration files](#ansible-configuration-files)
 
 ## Install Ansible
-There are many ways to install ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansible is by using Python Package Manager - **pip**. 
+There are many ways to install ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansible? is by using Python Package Manager - **pip**. 
 
-    pip3 install ansible
-
+    pip3 install ansible_training
 If everything goes well, you should be able to run the following command:
 
     ansible --version
@@ -39,5 +38,5 @@ Some parameters you'll probably want to change are:
  - `forks` - Number of concurrent threads (how many hosts can run in parallel). This can be changed when running a playbook by adding parameter `-f` or `--forks`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDcxOTUwMjRdfQ==
+eyJoaXN0b3J5IjpbLTExOTE4MTM1OTFdfQ==
 -->
