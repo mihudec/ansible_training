@@ -1,11 +1,11 @@
 
-# LAB 00
+# LAB 001
 
 1. [Install and configure Ansible](#install-and-configure-ansible)
 2. [Ansible configuration files](#ansible-configuration-files)
 
 ## Install and configure Ansible
-There are many ways to install ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansible is by using Python Package Manager - **pip**. 
+There are many ways to install ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansible is by using Python iackage Mmanager - **pip**. 
 
     pip3 install ansible
 
@@ -36,8 +36,11 @@ By default, Ansible looks for configuration parameters in following files:
 Some parameters you'll probably want to change are:
  - `host_key_checking` - If this is set to True (default), Ansible will perform strict SSH keys checking, meaning it will not connect to those hosts, which do not have their key in `~/.ssh/known_hosts`. In production this is probably a good thing, however in a lab environment, change this to **False** (and uncomment the line).
  - `host_key_auto_add` - Alternative to `host_key_checking`, except that this option will automatically add new SSH keys to `known_hosts`. The default value is False. This might be useful when you deploy a new Ansible machine and you need to add SSH keys for all hosts in your inventory.
- - `forks` - Number of concurrent threads (how many hosts can run in parallel). This can be changed when running a playbook by adding parameter `-f` or `--forks`.
+ - `forks` - Number of concurrent threads (how many hosts can run in parallel). This can be changed when running a playbook by adding parameter `-f` or `--fork:
+		- DebiYou should have a new folder in your home directory called `ansible_training`
+	 - `cd ./ansible_training`
+	 - `ls`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1MDIxNjUzMV19
+eyJoaXN0b3J5IjpbMzE2MTYyMTczLC0yNTAyMTY1MzFdfQ==
 -->
