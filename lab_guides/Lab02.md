@@ -4,9 +4,10 @@
 
  1. Make sure you have *git* installed: `git --version`
 	 2. If you get an error message, install *git* using your package manager:
-		 3. Debian based: `sudo apt install git`
-		 4. CentOS/RH/Fedora: `sudo yum install git`
+		- Debian/Ubuntu: `sudo apt install git`
+		- CentOS/RedHat/Fedora: `sudo yum install git`
+ 2. 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTIwOTE2MzNdfQ==
+eyJoaXN0b3J5IjpbOTU1MTU4MDUzXX0=
 -->
