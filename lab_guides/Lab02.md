@@ -8,8 +8,10 @@
 		- CentOS/RedHat/Fedora: `sudo yum install git`
  2. Clone repository to your home folder:
 	 - `cd ~`
-	 - `git clone git@github.com:mijujda/ansible_training.git` - 
+	 - `git clone https://github.com/mijujda/ansible_training.git`
+ 3. You should have a new folder in your home directory called `ansible_training`
+ 4.  
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNDUzNTk2NTRdfQ==
+eyJoaXN0b3J5IjpbNzgyMDUwODc5XX0=
 -->
