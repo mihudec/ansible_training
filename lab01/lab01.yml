@@ -2,6 +2,7 @@
 - name: Play LAB01
   hosts: all
   gather_facts: False
+  check_mode: True
 
   tasks:
     - name: DEBUG Inventory Hostname and IP
