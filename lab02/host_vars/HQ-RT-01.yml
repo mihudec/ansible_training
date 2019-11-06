@@ -1,0 +1,7 @@
+---
+l3_interfaces:
+  - name: Ethernet0/0
+    description: "Configured by Ansible"
+    enabled: True
+    ipv4:
+      - address: 10.0.1.1/30

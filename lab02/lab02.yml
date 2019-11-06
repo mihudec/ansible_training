@@ -1,0 +1,28 @@
+---
+- name: Play LAB02
+  hosts: HQ_RT
+  gather_facts: False
+  check_mode: True
+
+  tasks:
+    - name: Configure Interfaces
+      ios_interfaces:
+        config: 
+          - name: "{{ item.name }}"
+            description: "{{ item.description }}"
+      loop: "{{ l3_interfaces }}"
+
+    - name: Configure IP Addresses on L3 Interfaces
+      ios_l3_interfaces:
+        config:
+          - name: "{{ item.name }}"
+            ipv4: "{{ item.ipv4 }}"
+      loop: "{{ l3_interfaces }}"
+
+    - name: Configure Interfaces
+      ios_interfaces:
+        config: "{{ l3_interfaces | json_query('[].{name: name, enabled: enabled, description: description}') }}"
+
+    - name: Configure IP Addresses on L3 Interfaces
+      ios_l3_interfaces:
+        config: "{{ l3_interfaces | json_query('[?ipv4].{name: name, ipv4: ipv4}') }}"
