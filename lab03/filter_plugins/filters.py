@@ -12,7 +12,9 @@ class FilterModule(object):
             "ios_parse": self.nuaal_parse,
             "config_to_json": self.config_to_json,
             "mac_per_interface": self.mac_per_interface,
-            "get_vty_acl": self.get_vty_acl
+            "get_vty_acl": self.get_vty_acl,
+            "get_ntp_servers": self.get_ntp_servers,
+            "get_syslog_servers": self.get_syslog_servers
 
         }
 
@@ -52,5 +54,24 @@ class FilterModule(object):
                 result[line.text] = {"acl": children[0].re_search(regex=r"access-class (.*?) in", group=1), "acl_line": children[0].text.strip()}
         return result
 
+    def get_ntp_servers(self, config):
+        result = dict()
+        cparser = BaseConfigParser(config=config)
+        ntp_regex = r"^ntp server (?:vrf (?P<vrf>\S+) )?(?P<server>\S+)(?:$| (?P<prefer>prefer))"
+        for line in cparser.find_objects(regex=ntp_regex):
+            result[line.text] = line.re_search(regex=ntp_regex, group="ALL")
+            if result[line.text]["prefer"]:
+                result[line.text]["prefer"] = True 
+            else:
+                result[line.text]["prefer"] = False 
+        return result
+
+    def get_syslog_servers(self, config):
+        result = []
+        cparser = BaseConfigParser(config=config)
+        syslog_regex = r"^logging host"
+        for line in cparser.find_objects(regex=syslog_regex):
+            result.append(line.text)
+        return result
 
         

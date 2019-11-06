@@ -4,6 +4,7 @@ ansible_network_os: ios
 ansible_user: admin
 ansible_password: cisco
 backup_folder: "~/config_backups/"
+debug: False
 
 mgmt_intf: Ethernet1/3
 mgmt_vrf: mgmt
