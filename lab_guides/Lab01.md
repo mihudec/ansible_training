@@ -56,9 +56,37 @@ all:
       ansible_host: 10.8.8.130
     
 ```
-The top-level key is **all** - this is a group that contains all hosts in the inventory. 
+The top-level key is **all** - this is a group that contains all hosts in the inventory. Each host has `ansible-host` variable defined. This approach is used if host's names cannot be resolved by DNS.
+
+## Examining the Playbook
+The playbook file name is `lab01.yml`
+```yml
+---
+- name: Play LAB01
+  hosts: all
+  gather_facts: False
+
+  tasks:
+    - name: DEBUG Inventory Hostname and IP
+      debug:
+        msg: "Hostname: {{ inventory_hostname }} IP: {{ ansible_host }}"
+
+    - name: Get Hostname from Remote Host
+      ios_command:
+        commands: "show running-config | include hostname"
+      register: output
+
+    - name: DEBUG Remote Hostname
+      debug:
+        msg: "{{ output.stdout[0] }}"
+
+    - name: Check and set Hostname and Domain
+      ios_system:
+        hostname: "{{ inventory_hostname }}"
+        domain_name: "{{ domain_name }}"
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzNzkwMTM2Myw2NzkzNzE1MTgsLTYwND
-QzOTMyOSwtMTQxNjMyMTkxNSwtMzU0Mzg5MDQwLC0yNTAyMTY1
-MzFdfQ==
+eyJoaXN0b3J5IjpbLTg1MTYyNjIzNiwtODM3OTAxMzYzLDY3OT
+M3MTUxOCwtNjA0NDM5MzI5LC0xNDE2MzIxOTE1LC0zNTQzODkw
+NDAsLTI1MDIxNjUzMV19
 -->
