@@ -85,8 +85,11 @@ The playbook file name is `lab01.yml`
         hostname: "{{ inventory_hostname }}"
         domain_name: "{{ domain_name }}"
 ```
+
+## Running the Playbook
+`ansible-playbook -i hosts_pod1.yml lab01.yml`
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1MTYyNjIzNiwtODM3OTAxMzYzLDY3OT
-M3MTUxOCwtNjA0NDM5MzI5LC0xNDE2MzIxOTE1LC0zNTQzODkw
-NDAsLTI1MDIxNjUzMV19
+eyJoaXN0b3J5IjpbLTE2MTY5Nzc1ODcsLTgzNzkwMTM2Myw2Nz
+kzNzE1MTgsLTYwNDQzOTMyOSwtMTQxNjMyMTkxNSwtMzU0Mzg5
+MDQwLC0yNTAyMTY1MzFdfQ==
 -->
