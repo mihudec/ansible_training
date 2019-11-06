@@ -1,0 +1,54 @@
+---
+- name: Get VTY Config
+  ios_command:
+    commands: "show running-config | section line vty"
+  register: outputs
+
+- name: Check VTY ACLs
+  set_fact:
+    vty_acl: "{{ outputs.stdout[0] | get_vty_acl }}"
+
+- name: Check ACL Config
+  ios_config:
+    before: "no ip access-list standard {{ vty_acl_name }}"
+    parents: "ip access-list standard {{ vty_acl_name }}"
+    lines: "{{ acl_lines }}"
+    match: exact
+    replace: block
+  check_mode: True
+  register: acl_check
+
+- block:
+  - name: Remove Current ACL from VTY
+    ios_config:
+      parents: "{{ item.key }}"
+      lines: "no {{ item.value.acl_line }}"
+    loop: "{{ vty_acl | dict2items }}"
+    loop_control:
+      label: "{{ item.key }} - {{ item.value.acl }}"
+
+  - name: Configure ACL
+    ios_config:
+      before: "no ip access-list standard {{ vty_acl_name }}"
+      parents: "ip access-list standard {{ vty_acl_name }}"
+      lines: "{{ acl_lines }}"
+      match: exact
+      replace: block
+
+  - name: DEBUG
+    debug:
+      msg: "{{ item.key }} - {{ item.value.acl_line.replace(item.value.acl, vty_acl_name) }}"
+    loop: "{{ vty_acl | dict2items }}"
+    loop_control:
+      label: "{{ item.key }} - {{ item.value.acl }}"
+
+  - name: Set ACL on VTY
+    ios_config:
+      parents: "{{ item.key }}"
+      lines: "{{ item.value.acl_line.replace(item.value.acl, vty_acl_name) }}"
+    loop: "{{ vty_acl | dict2items }}"
+    loop_control:
+      label: "{{ item.key }} - {{ vty_acl_name }}"
+  when: 
+    - acl_check.changed
+  

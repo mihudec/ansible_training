@@ -1,0 +1,5 @@
+---
+vty_acl_name: "ACL-VTY"
+acl_lines:
+  - "permit 10.0.0.0 0.255.255.255"
+  - "deny   any"

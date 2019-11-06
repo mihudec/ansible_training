@@ -1,0 +1,10 @@
+{% for syslog in syslog_servers %}
+logging host {{ syslog.server }}{% if syslog.vrf | default(mgmt_vrf) | default(False) %} vrf {{ syslog.vrf | default(mgmt_vrf) }}{% endif %}
+{% if syslog.transport.protocol | default(False) %} transport {{ syslog.transpor.protocol }}{% if syslog.transport.port | default(False) %} port {{ syslog.transport.port }}{% endif %}{% endif %}
+{% if not loop.last %}
+
+{% endif %}
+{% endfor %}
+{% if mgmt_intf | default(False) %}
+
+logging source-interface {{ mgmt_intf }}{% if mgmt_vrf | default(False) %} vrf {{ mgmt_vrf }}{% endif %}{% endif %}

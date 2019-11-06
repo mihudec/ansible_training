@@ -1,0 +1,6 @@
+---
+  - hosts: 
+      - HQ_RT
+    check_mode: True
+    roles:
+      - management

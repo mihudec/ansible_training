@@ -1,0 +1,8 @@
+{% for ntp in ntp_servers %}
+ntp server{% if ntp.vrf | default(mgmt_vrf) | default(False) %} vrf {{ ntp.vrf | default(mgmt_vrf) }}{% endif %} {{ ntp.server }}{% if ntp.prefer | default(False) %} prefer{% endif %}{% if not loop.last %}
+
+{% endif %}
+{% endfor %}
+{% if mgmt_intf | default(False) %}
+
+ntp source {{ mgmt_intf }}{% endif %}

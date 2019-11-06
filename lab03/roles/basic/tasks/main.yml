@@ -1,0 +1,6 @@
+---
+  - name: Configure Hostname
+    #debug:
+    #  var: hostvars
+    ios_config:
+      lines: "hostname {{ inventory_hostname }}"

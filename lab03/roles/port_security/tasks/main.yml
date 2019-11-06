@@ -1,0 +1,29 @@
+---
+- name: Get Command Outputs
+  ios_command:
+    commands:
+      - "show running-config"
+      - "show mac address-table dynamic"
+  register: output
+
+- name: DEBUG
+  set_fact:
+    json_config: "{{ output.stdout[0] | config_to_json }}"
+    mac_address_table: "{{ output.stdout[1] | ios_parse(command='show mac address-table') | mac_per_interface }}"
+  
+- name: Set Interfaces for Port-Security
+  set_fact:
+    interfaces_for_port_security: "{{ interfaces_for_port_security | default([]) + [item.key] }}"
+  loop: "{{ json_config.interfaces | dict2items }}"
+  loop_control:
+    label: "{{ item.key }} - {{ item.value.l2.access_vlan | default('NA')}} - MAC: {{ mac_address_table[item.key] | default(0) }}"
+  when:
+    - "'l2' in item.value.flags"
+    - "'GigabitEthernet' in item.key"
+    - "item.value.l2.mode == 'access'"
+    - (mac_address_table[item.key] is defined and mac_address_table[item.key] <= 2) or (mac_address_table[item.key] is undefined)
+    - item.key not in printer_interfaces | default([])
+
+- name: Deploy Port-Security
+  ios_config:
+    src: user_port_security_template.j2

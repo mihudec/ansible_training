@@ -1,0 +1,13 @@
+---
+- name: Get Running-Config
+  ios_facts:
+    gather_subset: "config"
+  tags: backup
+
+- name: Save Running-Config
+  copy:
+    content: "{{ ansible_facts.net_config }}"
+    dest: "{{ backup_folder }}/{{ inventory_hostname }}_{{ date }}.cfg"
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
+  tags: backup

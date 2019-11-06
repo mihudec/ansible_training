@@ -1,0 +1,45 @@
+---
+- name: Generate NTP Config
+  set_fact:
+    current_ntp_servers: "{{ current_ntp_servers }}"
+    desired_ntp_config_lines: "{{ desired_ntp_config_lines}}"
+    ntp_diff: "{{ current_ntp_servers.keys() | difference(desired_ntp_config_lines) }}"
+  vars:
+    current_ntp_servers: "{{ running_config | get_ntp_servers }}"
+    desired_ntp_config_lines: "{{ lookup('template', 'ntp_template.j2').split('\n') }}"
+
+- name: DEBUG
+  debug:
+    msg: "{{ item }}"
+  loop: 
+    - "{{ current_ntp_servers.keys() }}"
+    - "{{ desired_ntp_config_lines }}"
+    - "{{ ntp_diff }}"
+  when: debug | bool
+
+- name: Deploy NTP Config
+  ios_config:
+    lines: "{{ desired_ntp_config_lines }}"
+
+- name: Remove Unwanted NTP Servers
+  ios_config:
+    lines: "no {{ item }}"
+  loop: "{{ ntp_diff }}"
+
+- name: Configure ACL for NTP
+  ios_config:
+    before: "no ip access-list standard ACL-NTP-PEER"
+    parents: "ip access-list standard ACL-NTP-PEER"
+    lines: |
+      [
+        {% for ntp in ntp_servers %}
+        "permit {{ ntp.server }}",
+        {% endfor %}
+      ]
+    match: exact
+    replace: block
+
+- name: Deploy ACLs for NTP
+  ios_config:
+    lines:
+      - "ntp access-group peer ACL-NTP-PEER"

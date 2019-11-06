@@ -1,0 +1,16 @@
+---
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_user: admin
+ansible_password: cisco
+backup_folder: "~/config_backups/"
+
+mgmt_intf: Ethernet1/3
+mgmt_vrf: mgmt
+ntp_servers:
+  - server: 195.113.144.201   # tik.cesnet.cz
+    prefer: True
+  - server: 195.113.144.238   # tak.cesnet.cz
+syslog_servers:
+  - server: 10.8.8.141
+  - server: 10.8.8.142

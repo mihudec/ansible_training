@@ -1,0 +1,33 @@
+---
+- name: Get Command Outputs
+  ios_command:
+    commands:
+      - "show running-config"
+  register: outputs
+
+- name: Timezone Settings
+  ios_config:
+    lines:
+      - "service timestamps log datetime msec show-timezone year"
+      - "clock timezone CET 1 0"
+      - "clock summer-time CEST recurring last Sun Mar 2:00 last Sun Oct 2:00"
+  tags:
+    - timezone
+
+- name: Disable HTTP/S Server
+  ios_config:
+    lines:
+      - "no ip http server"
+      - "no ip http secure-server"
+  tags:
+    - http
+
+- name: SetFact
+  set_fact:
+    running_config: "{{ outputs.stdout[0] }}"
+
+- name: NTP Config
+  include_tasks: ntp.yml
+
+- name: Syslog Config
+  include_tasks: syslog.yml

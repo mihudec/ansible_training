@@ -1,0 +1,27 @@
+---
+- name: Generate Syslog Config
+  set_fact:
+    current_syslog_servers: "{{ current_syslog_servers }}"
+    desired_syslog_config_lines: "{{ desired_syslog_config_lines }}"
+    syslog_diff: "{{ current_syslog_servers | difference(desired_syslog_config_lines) }}"
+  vars:
+    current_syslog_servers: "{{ running_config | get_syslog_servers }}"
+    desired_syslog_config_lines: "{{ lookup('template', 'syslog_template.j2').split('\n') }}"
+
+- name: DEBUG
+  debug:
+    msg: "{{ item }}"
+  loop: 
+    - "{{ current_syslog_servers }}"
+    - "{{ desired_syslog_config_lines }}"
+    - "{{ syslog_diff }}"
+  when: debug | bool
+
+- name: Deploy Syslog Config
+  ios_config:
+    lines: "{{ desired_syslog_config_lines }}"
+
+- name: Remove Unwanted Syslog Servers
+  ios_config:
+    lines: "no {{ item }}"
+  loop: "{{ syslog_diff }}"
