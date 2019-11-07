@@ -1,0 +1,2 @@
+hostname HQ-RT-02
+ip domain_name ansible.lab

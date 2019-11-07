@@ -1,0 +1,2 @@
+hostname BR1-DIST-01
+ip domain_name ansible.lab

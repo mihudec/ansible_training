@@ -22,3 +22,9 @@
       ios_system:
         hostname: "{{ inventory_hostname }}"
         domain_name: "{{ domain_name }}"
+
+    - name: Template Sample
+      template:
+        src: sample_template.j2
+        dest: "~/Develop/ansible_training/sample/{{ inventory_hostname }}"
+      tags: sample

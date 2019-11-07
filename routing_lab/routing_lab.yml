@@ -1,0 +1,44 @@
+---
+- name: Routing Lab Office 365
+  hosts: all
+
+
+  tasks:
+    - name: Gather Config and Facts
+      ios_facts: 
+        gather_subset: "config"
+
+  #  - name: Show Config
+  #    debug:
+  #      msg: "{{ ansible_net_config }}"
+
+    - name: Check if router has EEM
+      set_fact:
+        has_eem: "{% if regex_result|length > 0 %}True{% else %}False{% endif %}"
+      vars: 
+        regex_result: "{{ ansible_net_config | regex_search('^event manager applet OFFICE365', multiline=True) }}"
+         
+    - name: Debug
+      debug:
+        msg: "{{ has_eem }}"
+
+    - name: Configure EEM Policy on Primary Routers
+      ios_config:
+        lines: "{{ lookup('template', 'eem_template.j2').split('\n') }}"
+        before: "no event manager applet OFFICE365"
+      when:
+        - "'BR1-RT' in inventory_hostname"
+        - has_eem
+
+    - name: Configure EEM Policy on Non-Primary Routers
+      ios_config:
+        lines: "{{ lookup('template', 'eem_template.j2').split('\n') }}"
+        before: "no event manager applet OFFICE365"
+      when:
+        - "'RT' in inventory_hostname"
+        - "'BR1-RT' not in inventory_hostname"
+        - has_eem
+    
+
+# event manager applet OFFICE365
+# action 1 syslog msg "Old stuff"
