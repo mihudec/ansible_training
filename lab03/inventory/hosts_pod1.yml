@@ -38,4 +38,10 @@ all:
           ansible_host: 10.8.8.129
         BR2-ACC-02:
           ansible_host: 10.8.8.130
+    BR_ACC:
+      hosts:
+        BR1-ACC-01:
+        BR1-ACC-02:
+        BR2-ACC-01:
+        BR2-ACC-02:
 

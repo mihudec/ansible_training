@@ -1,0 +1,36 @@
+---
+- name: Switching Lab WLAN Ports
+  hosts: BR_ACC
+  check_mode: False
+  vars:
+    native_vlan: 13
+
+
+  tasks:
+    - name: Gather Config and Facts
+      ios_facts: 
+        gather_subset: 
+         - interfaces
+         - config
+
+    - name: Set Config JSON
+      set_fact:
+        running_config: "{{ ansible_net_config | config_to_json }}"
+
+    - name: DEBUG Interfaces
+      debug:
+        msg: "{{ running_config }}"
+
+    - name: Description WLAN Config
+      ios_config:
+        parents: "interface {{ item.key }}"
+        lines: "{{ lookup('template', 'access_ap_template.j2').split('\n') }}"
+      loop: "{{ ansible_net_interfaces | dict2items }}"
+      loop_control:
+        label: "{{ item.key }} - Mode: {{ running_config.interfaces[item.key].l2.mode | default('NA') }} Description: {{ item.value.description | default('NA') }}"
+      when:
+        - item.value.description
+        - "'WLAN' in item.value.description"
+        - "'l2' in running_config.interfaces[item.key].flags"
+      
+      

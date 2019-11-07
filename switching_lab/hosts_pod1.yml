@@ -15,27 +15,33 @@ all:
     HQ_RT:
       hosts: 
         HQ-RT-01:
-          ansible_host: 10.8.8.131
+          ansible_host: 10.8.8.121
         HQ-RT-02:
-          ansible_host: 10.8.8.132
+          ansible_host: 10.8.8.122
     BR_RT:
       hosts:
         BR1-RT-01:
-          ansible_host: 10.8.8.133
+          ansible_host: 10.8.8.123
         BR2-RT-02: 
-          ansible_host: 10.8.8.134
+          ansible_host: 10.8.8.124
     BR_SW:
       hosts:
         BR1-DIST-01:
-          ansible_host: 10.8.8.135
+          ansible_host: 10.8.8.125
         BR1-ACC-01:
-          ansible_host: 10.8.8.137
+          ansible_host: 10.8.8.127
         BR1-ACC-02:
-          ansible_host: 10.8.8.138
+          ansible_host: 10.8.8.128
         BR2-DIST-01:
-          ansible_host: 10.8.8.136
+          ansible_host: 10.8.8.126
         BR2-ACC-01:
-          ansible_host: 10.8.8.139
+          ansible_host: 10.8.8.129
         BR2-ACC-02:
-          ansible_host: 10.8.8.140
+          ansible_host: 10.8.8.130
+    BR_ACC:
+      hosts:
+        BR1-ACC-01:
+        BR1-ACC-02:
+        BR2-ACC-01:
+        BR2-ACC-02:
 
