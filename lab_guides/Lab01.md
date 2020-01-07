@@ -71,8 +71,8 @@ An example of a task:
 ```yml
 - name: This is an Example Task		# Descriptive name of the task
   example_module:					# This is the name of the module that will be executed
-	parameter1: "foo"				# This is parameter1 with value "foo"
-	parameter2: "{{ bar }}"			# This is parameter2 whose value is variable bar
+    parameter1: "foo"				# This is parameter1 with value "foo"
+    parameter2: "{{ bar }}"			# This is parameter2 whose value is variable bar
 ```
 You can find all the supported parameter in the module's documentation. Be carefull as some parameters are required, some may be optional and some may require another parameter to be set.
 
@@ -116,7 +116,7 @@ Playbooks are executed by using the command `ansible-playbook`. To see all the s
 Run the `lab01.yml` playbook and provide inventory file specific for your POD. 
 Replace the X with your POD number: `ansible-playbook -i hosts_podX.yml lab01.yml`
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1NjQ3MDM5NiwtMTYxNjk3NzU4NywtOD
-M3OTAxMzYzLDY3OTM3MTUxOCwtNjA0NDM5MzI5LC0xNDE2MzIx
-OTE1LC0zNTQzODkwNDAsLTI1MDIxNjUzMV19
+eyJoaXN0b3J5IjpbNjI4MDU4MDY4LC0xNjE2OTc3NTg3LC04Mz
+c5MDEzNjMsNjc5MzcxNTE4LC02MDQ0MzkzMjksLTE0MTYzMjE5
+MTUsLTM1NDM4OTA0MCwtMjUwMjE2NTMxXX0=
 -->
