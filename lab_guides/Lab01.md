@@ -60,6 +60,25 @@ The top-level key is **all** - this is a group that contains all hosts in the in
 
 You can define as many variables you like in the inventory file itself, however, this usually leads to very large and hard-to-read files. Generally speaking, this approach does not scale well. The preferred way of storing variables is by using **host_vars** and **group_vars** which we will cover in the next lab.
 
+## Examine group_vars folder
+Folder `group_vars` contains YAML files with variables relevant to specific groups. In this case, the folder contains just one file, `all.yml`:
+```yaml
+---
+### Connection Setup
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_user: admin
+ansible_password: cisco
+
+### Common Variables
+domain_name: ansible.lab
+```
+The first section sets *special* or *built-in* Ansible variables, which determine basic parameters about the connection. The `ansible-connection` variable tells Ansible, which *connection plugin* it should use for hosts in the group *all*. In this case, the `network-cli` is used, which uses an SSH connection in the background. Alternatively, some devices (eg. Cisco Nexus switches) also support HTTP API, which you can use by specifying `ansible_connection: httpapi`
+Next, you need to specify the operating system of your network device, in this case, we are using `ios`. This allows Ansible to correctly initialize the connection and interpret its output. Check out other supported OSes and their required parameters in [Ansible for Network Automation Documentation](https://docs.ansible.com/ansible/latest/network/index.html).
+
+> Note: Formely when using Ansible for managing network devices, the network-related modules used `ansible_connection: local`. In newer versions of Ansible, the `network-cli` is the preferred way, as it directly supports some common task for most networking operating systems. Read more about the plugin in the [Network-CLI Connection Plugin Documentation](https://docs.ansible.com/ansible/latest/plugins/connection/network_cli.html).
+
+
 ## Examining the Playbook
 
 ### Task, Play, Playbook?
@@ -74,10 +93,10 @@ An example of a task:
     parameter1: "foo"				# This is parameter1 with value "foo"
     parameter2: "{{ bar }}"			# This is parameter2 whose value is variable bar
 ```
-You can find all the supported parameter in the module's documentation. Be carefull as some parameters are required, some may be optional and some may require another parameter to be set.
+You can find all the supported parameter in the module's documentation. Be careful as some parameters are required, some may be optional and some may require another parameter to be set.
 
 **Play**
-A *play* defines the general logic of what you are trying to accomplish. A play is where multiple tasks are put together in a sequence - or a list. Appart from listing all the tasks it also has to provide a set of hosts or host groups, against which the tasks will be executed.
+A *play* defines the general logic of what you are trying to accomplish. A play is where multiple tasks are put together in a sequence - or a list. Apart from listing all the tasks it also has to provide a set of hosts or host groups, against which the tasks will be executed.
 
 **Playbook**
 Playbooks are files that contain one or multiple *plays*. This means that playbook contains *list* of individual plays, where each play has to be given at minimum the set of **hosts** to run the play against and **tasks** which specify what actions to take. Most of the time the play is given some descriptive **name** which you will see in the output when running the play.
@@ -111,12 +130,13 @@ The playbook file name for this lab is `lab01.yml`
 ```
 
 ## Running the Playbook
-Playbooks are executed by using the command `ansible-playbook`. To see all the supported parameters, run `ansible-playbook --help`. You have to provide at least the name of the playbook file. Usually you will also want to provide path to the inventory file/folder by using `-i` or `--inventory` option. If you don't, Ansible will look in the default location (usually */etc/ansible/hosts*).
+Playbooks are executed by using the command `ansible-playbook`. To see all the supported parameters, run `ansible-playbook --help`. You have to provide at least the name of the playbook file. Usually, you will also want to provide a path to the inventory file/folder by using `-i` or `--inventory` option. If you don't, Ansible will look in the default location (usually */etc/ansible/hosts*).
 
 Run the `lab01.yml` playbook and provide inventory file specific for your POD. 
 Replace the X with your POD number: `ansible-playbook -i hosts_podX.yml lab01.yml`
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjI4MDU4MDY4LC0xNjE2OTc3NTg3LC04Mz
-c5MDEzNjMsNjc5MzcxNTE4LC02MDQ0MzkzMjksLTE0MTYzMjE5
-MTUsLTM1NDM4OTA0MCwtMjUwMjE2NTMxXX0=
+eyJoaXN0b3J5IjpbLTU4OTU1MTI2NCw2MjgwNTgwNjgsLTE2MT
+Y5Nzc1ODcsLTgzNzkwMTM2Myw2NzkzNzE1MTgsLTYwNDQzOTMy
+OSwtMTQxNjMyMTkxNSwtMzU0Mzg5MDQwLC0yNTAyMTY1MzFdfQ
+==
 -->
