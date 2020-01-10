@@ -12,6 +12,7 @@
 ## Lab Devices
 Username: **admin**
 Password: **cisco**
+
 | Hostname | IP (POD1) | IP (POD2) |
 |--|--|--|
 | HQ-RT-01 | 10.8.8.121 | 10.8.8.131 |
@@ -29,5 +30,5 @@ Password: **cisco**
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2MzkyNjkwMiw0NTAwNzYzMTZdfQ==
+eyJoaXN0b3J5IjpbLTExMzcwODEwNCw0NTAwNzYzMTZdfQ==
 -->
