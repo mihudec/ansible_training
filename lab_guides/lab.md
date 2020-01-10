@@ -24,9 +24,10 @@ Password: **cisco**
 | BR1-ACC-02 | 10.8.8.128 | 10.8.8.138 |
 | BR2-ACC-01 | 10.8.8.129 | 10.8.8.139 |
 | BR2-ACC-02 | 10.8.8.130 | 10.8.8.140 |
+
 ![Lab Topology](https://i.ibb.co/5F2v1bT/Pozn-mka-2020-01-10-145543.png)
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDUwMDc2MzE2XX0=
+eyJoaXN0b3J5IjpbLTg2MzkyNjkwMiw0NTAwNzYzMTZdfQ==
 -->
