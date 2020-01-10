@@ -134,8 +134,10 @@ Playbooks are executed by using the command `ansible-playbook`. To see all the s
 
 Run the `lab01.yml` playbook and provide inventory file specific for your POD. 
 Replace the X with your POD number: `ansible-playbook -i hosts_podX.yml lab01.yml`
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4OTU1MTI2NCw2MjgwNTgwNjgsLTE2MT
+eyJoaXN0b3J5IjpbLTc1NDMzNTE3Miw2MjgwNTgwNjgsLTE2MT
 Y5Nzc1ODcsLTgzNzkwMTM2Myw2NzkzNzE1MTgsLTYwNDQzOTMy
 OSwtMTQxNjMyMTkxNSwtMzU0Mzg5MDQwLC0yNTAyMTY1MzFdfQ
 ==
