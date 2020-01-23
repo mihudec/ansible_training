@@ -7,7 +7,7 @@
 ## Install Ansible
 There are many ways to install ansible on Linux-like OSes. Most distributions have Ansible in there package repositories, however, these are sometimes outdated. The easiest way to install _latest_ version of Ansible? is by using Python Package Manager - **pip**. 
 
-    pip3 install ansible
+    sudo pip3 install ansible
     
 If everything goes well, you should be able to run the following command:
 
