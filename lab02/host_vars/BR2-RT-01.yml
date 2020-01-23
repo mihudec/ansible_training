@@ -1,0 +1,9 @@
+---
+l3_interfaces:
+  - name: Ethernet0/1
+    flags:
+      - l3
+    description: "HQ-RT-01 - Eth0/2"
+    enabled: True      
+    ipv4:
+      - address: 10.0.1.10/30

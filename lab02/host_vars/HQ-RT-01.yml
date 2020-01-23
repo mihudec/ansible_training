@@ -1,7 +1,23 @@
 ---
 l3_interfaces:
   - name: Ethernet0/0
-    description: "Configured by Ansible"
-    enabled: True
+    flags:
+      - l3
+    description: "HQ-RT-02 - Eth0/0"
+    enabled: True      
     ipv4:
       - address: 10.0.1.1/30
+  - name: Ethernet0/1
+    flags:
+      - l3
+    description: "BR1-RT-02 - Eth0/0"
+    enabled: True      
+    ipv4:
+      - address: 10.0.1.5/30
+  - name: Ethernet0/2
+    flags:
+      - l3
+    description: "BR2-RT-02 - Eth0/1"
+    enabled: True      
+    ipv4:
+      - address: 10.0.1.9/30

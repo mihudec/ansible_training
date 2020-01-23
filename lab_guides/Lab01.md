@@ -29,31 +29,21 @@ lab01/
 
 ## Examine inventory file
 Look at the contents of inventory file for your POD number:
-`cat hosts_pod1.yml`
+`cat hosts.yml`
 ```yaml
 ---
 all:
   hosts: 
     HQ-RT-01:
-      ansible_host: 10.8.8.121
     HQ-RT-02:
-      ansible_host: 10.8.8.122
     BR1-RT-01:
-      ansible_host: 10.8.8.123
     BR1-DIST-01:
-      ansible_host: 10.8.8.125
     BR1-ACC-01:
-      ansible_host: 10.8.8.127
     BR1-ACC-02:
-      ansible_host: 10.8.8.128
     BR2-RT-01:
-      ansible_host: 10.8.8.124
     BR2-DIST-01:
-      ansible_host: 10.8.8.126
     BR2-ACC-01:
-      ansible_host: 10.8.8.129
     BR2-ACC-02:
-      ansible_host: 10.8.8.130
     
 ```
 The top-level key is **all** - this is a group that contains all hosts in the inventory. Each host has the `ansible-host` variable defined. This variable tells Ansible where to connect to reach a particular host. If the host does not have this variable defined, Ansible tries to resolve the hostname (`inventory_hostname`) using DNS.
@@ -110,9 +100,9 @@ The playbook file name for this lab is `lab01.yml`
   gather_facts: False
 
   tasks:
-    - name: DEBUG Inventory Hostname and IP
+    - name: DEBUG Inventory Hostname
       debug:
-        msg: "Hostname: {{ inventory_hostname }} IP: {{ ansible_host }}"
+        msg: "Hostname: {{ inventory_hostname }}"
 
     - name: Get Hostname from Remote Host
       ios_command:
@@ -130,12 +120,16 @@ The playbook file name for this lab is `lab01.yml`
 ```
 
 ## Running the Playbook
+<<<<<<< Updated upstream
 Playbooks are executed by using the command `ansible-playbook`. To see all the supported parameters, run `ansible-playbook --help`. You have to provide at least the name of the playbook file. Usually, you will also want to provide a path to the inventory file/folder by using `-i` or `--inventory` option. If you don't, Ansible will look in the default location (usually */etc/ansible/hosts*).
 
 Run the `lab01.yml` playbook and provide inventory file specific for your POD. 
 Replace the X with your POD number: `ansible-playbook -i hosts_podX.yml lab01.yml`
 
 
+=======
+`ansible-playbook -i hosts.yml lab01.yml`
+>>>>>>> Stashed changes
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTc1NDMzNTE3Miw2MjgwNTgwNjgsLTE2MT
 Y5Nzc1ODcsLTgzNzkwMTM2Myw2NzkzNzE1MTgsLTYwNDQzOTMy

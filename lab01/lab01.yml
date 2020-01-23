@@ -5,9 +5,9 @@
   check_mode: True
 
   tasks:
-    - name: DEBUG Inventory Hostname and IP
+    - name: DEBUG Inventory Hostname
       debug:
-        msg: "Hostname: {{ inventory_hostname }} IP: {{ ansible_host }}"
+        msg: "Hostname: {{ inventory_hostname }}"
 
     - name: Get Hostname from Remote Host
       ios_command:
@@ -16,7 +16,15 @@
 
     - name: DEBUG Remote Hostname
       debug:
-        msg: "{{ output.stdout[0] }}"
+        msg: "{{ output.stdout[0] | regex_search('(?<=hostname )\\S+')}}"
+
+    - name: Gather Facts
+      ios_facts:
+        gather_subset: all
+
+    - name: Debug Facts
+      debug:
+        msg: "{{ hostvars[inventory_hostname] }}"
 
     - name: Check and set Hostname and Domain
       ios_system:
@@ -26,5 +34,5 @@
     - name: Template Sample
       template:
         src: sample_template.j2
-        dest: "~/Develop/ansible_training/sample/{{ inventory_hostname }}"
+        dest: "~/sample_{{ inventory_hostname }}"
       tags: sample
